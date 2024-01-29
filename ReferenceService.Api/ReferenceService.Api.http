@@ -1,0 +1,6 @@
+@ReferenceService.Api_HostAddress = http://localhost:5277
+
+GET {{ReferenceService.Api_HostAddress}}/todo/
+Accept: application/json
+
+###
