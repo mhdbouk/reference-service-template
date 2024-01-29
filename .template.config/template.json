@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Mohamad Dbouk",
+  "classifications": [
+    "web",
+    "api",
+    "aspnet"
+  ],
+  "identity": "ReferenceService.Template",
+  "name": "Reference Service Template",
+  "shortName": "reference",
+  "tags": {
+    "language": "C#",
+    "type": "solution"
+  },
+  "sourceName": "ReferenceService",
+  "description": "This is a reference template",
+  "symbols": {
+    "UseSwagger": {
+      "type": "parameter",
+      "description": "Use Swagger?",
+      "defaultValue": "true",
+      "datatype": "bool"
+    },
+    "DatabaseProvider": {
+      "type": "parameter",
+      "description": "Select the database provider (sqlserver or cosmosdb)",
+      "choices": [
+        {
+          "choice": "sqlserver",
+          "displayName": "SQL Server",
+          "description": "Use SQL Server with Entity Framework"
+        },
+        {
+          "choice": "cosmosdb",
+          "displayName": "Cosmos DB",
+          "description": "Use Cosmos DB provider"
+        }
+      ]
+    },
+    "UseSqlServer": {
+      "type": "computed",
+      "value": "(DatabaseProvider == \"sqlserver\")"
+    },
+    "UseCosmosDb": {
+      "type": "computed",
+      "value": "(DatabaseProvider == \"cosmosdb\")"
+    }
+  },
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "condition": "(UseSqlServer)",
+          "exclude": [
+            "**/Data/NoSql/**/*"
+          ]
+        },
+        {
+          "condition": "(UseCosmosDb)",
+          "exclude": [
+            "**/Data/Sql/**/*"
+          ]
+        }
+      ]
+    }
+  ]
+}
